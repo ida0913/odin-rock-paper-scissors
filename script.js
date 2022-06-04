@@ -19,13 +19,13 @@ function playRound(playerSelection, computerSelection) {
 
     else if (playerChoice === "paper") {
         if (computerSelection === "scissors") return "Player Loses! Computer Wins :(";
-        if (computerSelection === "rock") return "Player Wins! Computer Loses :)";
+        if (computerSelection === "rock") return "Player Wins! Computer Loses :";
     } else if (playerChoice === "rock") {
         if (computerSelection === "paper") return "Player Loses! Computer Wins :(";
-        if (computerSelection === "scissors") return "Player Wins! Computer Loses :)";
+        if (computerSelection === "scissors") return "Player Wins! Computer Loses :";
     } else if (playerChoice === "scissors") {
         if (computerSelection === "rock") return;
-        if (computerSelection === "paper") return "Player Wins! Computer Loses :)";
+        if (computerSelection === "paper") return "Player Wins! Computer Loses :";
     } else {
         return playRound(prompt("Error. You may have mispelled the word. Try again"), computerSelection);
     }
@@ -43,7 +43,7 @@ function game() {
         console.log(result)
 
         if (result === "Draw!") draws++;
-        else if (result === "Player Wins! Computer Loses :)") wins++;
+        else if (result === "Player Wins! Computer Loses :") wins++;
         else if (result === "Player Loses! Computer Wins :(") losses++;
         console.log(`You have ${wins} wins, ${losses} losses, and ${draws} draws`);
         if (losses == 5) {
