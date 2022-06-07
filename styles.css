@@ -1,0 +1,51 @@
+img {
+    height: 200px;
+    width: 200px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#score-header {
+    font-size: 48px;
+    margin: 40px;
+
+}
+
+.score {
+    text-align: center;
+    margin: 40px;
+    font-size: large;
+    padding: 8px;
+    border: 3px solid black;
+}
+
+.imgs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 400px;
+}
+
+.displayoff {
+    display: none;
+    margin: 10px;
+}
+
+.computer-choice {
+    margin: 40px;
+}
+
+.result {
+    margin: 40px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+#button {
+    display: none;
+}

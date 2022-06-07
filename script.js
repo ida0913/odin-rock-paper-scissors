@@ -1,116 +1,164 @@
-//init scores for win logic later
-
+// init scores
 let wins = 0;
 let losses = 0;
 let draws = 0;
 
+//init result
+let result = "";
 
 
-// Logic to return random computer choice
-function computerPlay() {
-    let num = Math.floor((Math.random() * 3)) + 1;
-    if (num == 3) {
-        return "rock";
-    } else if (num == 2) {
-        return "paper";
-    } else {
-        return "scissors";
-    }
+//init computerSelection
+let computerChoice;
+//init display Computer image
+
+//function to find if game is over
+function isGameOver() {
+    return (wins === 5 || losses === 5) ? true : false;
 }
 
-//play single round of game
+//return the final result of game
+function finalWinOrLoss() {
+    if (wins === 5) return "win";
+    else if (losses === 5) return "lose";
+    else return "N/A";
+}
+
+
+//init score div inside of #score-container 
+const scoreContainer = document.querySelector("#score-container");
+const score = document.createElement("div");
+
+
+//update Score board by updating div created earlier
+function updateScoreBoard() {
+    score.classList.add("score");
+    score.innerHTML = `You: ${wins} Computer: ${losses} Draws: ${draws}`;
+    scoreContainer.appendChild(score);
+}
+
+
+//randomly generate rock, paper, or scissors for computer
+function computerPlay() {
+
+    let num = Math.floor((Math.random() * 3)) + 1;
+    if (num === 3) return "rock";
+    else if (num === 2) return "paper";
+    else return "scissors";
+
+}
+
+
+//play a single round of game
+
 function playRound(playerSelection, computerSelection) {
-    console.log(computerSelection);
-    if (playerSelection === computerSelection) draws++;
+
+    updateComputerImage();
+
+    if (playerSelection === computerSelection) {
+        draws++;
+        result = "You Drew!"
+    }
     else if (
         (playerSelection === "rock" && computerSelection === "paper")
         || (playerSelection === "paper" && computerSelection === "scissors")
         || (playerSelection === "scissors" && computerSelection === "rock")
     ) {
         losses++;
+        result = "You Lost :("
     }
     else {
-        wins++
+        wins++;
+        result = "You Won!";
     }
-    updateScore();
-    console.log(`You have ${wins} wins, ${losses} losses, and ${draws} draws`);
+    updateScoreBoard();
+    updateResult();
 }
 
-
-//return true if game is over and false if not
-function isGameOver() {
-    return (wins === 5 || losses === 5) ? true : false;
-}
-
-
-//logic to keep playing rounds til game is over
+//logic to keep playing f25
 function game(playerSelection) {
-
     if (isGameOver()) {
         gameOver();
     } else {
         let computerSelection = computerPlay();
+
+        computerChoice = computerSelection;
         playRound(playerSelection.toLowerCase(), computerSelection);
     }
     if (isGameOver()) {
         gameOver();
+        //update func w end game splash
     }
-
-
-
-}
-const scoreContainer = document.querySelector("#container");
-const score = document.createElement('div');
-
-function updateScore() {
-
-    score.classList.add("score");
-    score.innerHTML = `You: ${wins} Computer: ${losses}. Draws: ${draws}`;
-    scoreContainer.appendChild(score);
-
 }
 
-function winOrLoss(){
-    if(score === 5) return "win";
-    else return "loss";
-    
+//update result Div
+
+const resultContainer = document.querySelector("#result");
+const resultP = document.createElement("p");
+
+function updateResult() {
+
+    resultP.innerHTML = `${result}`
+    resultContainer.appendChild(resultP);
+
 }
 
-
-//puts buttons away and then adds a "game over" splash
+//hide element and show final result 
 function gameOver() {
-    const buttons = document.querySelectorAll(".btn");
-    buttons.forEach((button) => {
-        button.style.display = "none";
-
+    document.getElementById("score-header").innerHTML = `You ${finalWinOrLoss()}!`
+    score.innerHTML = `Final Score: You: ${wins} Computer: ${losses} Draws: ${draws}`;
+    scoreContainer.appendChild(resultP);
+    const allImg = document.querySelectorAll("img");
+    allImg.forEach((img) => {
+        img.style.display = "none";
     });
-
-    if(winOrLoss === "win"){
-        const box = document.getElementById('box');
-        box.style.display = "block";
-    }
-
-
+    const allP = document.querySelectorAll("p");
+    allP.forEach((p) => {
+        p.style.display = "none";
+    });
+    const playAgainBut = document.getElementById("button");
+    playAgainBut.style.display = "block";
 
 }
+//refresh page to play again
+function playAgain() {
+    window.location.reload();
+}
+//update computer selection image
 
-//init and add event listeners to buttons
+function updateComputerImage() {
+    const displayImg = document.getElementById(`comp-${computerChoice}`);
+    if (wins == 0 || losses == 0 || draws == 0) {
+        displayImg.style.display = "block";
+    }
+    const otherDisplayImg = document.querySelectorAll(".displayoff");
+    otherDisplayImg.forEach((otherImg) => {
+        otherImg.style.display = "none";
+    });
+    displayImg.style.display = "block";
+}
+
+
+//init and add event listeners to imgs
+
 const rockButton = document.getElementById("rock");
 const paperButton = document.getElementById("paper");
 const scissorsButton = document.getElementById("scissors");
+const playAgainButton = document.getElementById("button");
 
-rockButton.addEventListener('click', () => {
+rockButton.addEventListener("click", () => {
     game("rock");
 });
-paperButton.addEventListener('click', () => {
+
+paperButton.addEventListener("click", () => {
     game("paper");
 });
-scissorsButton.addEventListener('click', () => {
+
+scissorsButton.addEventListener("click", () => {
     game("scissors");
 });
-
-
-
+playAgainButton.addEventListener("click", () => {
+    playAgain();
+});
 
 
 

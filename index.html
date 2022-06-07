@@ -5,23 +5,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock, Paper, Scissors</title>
+    <title>odin-rock-paper-scissors</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 
 </head>
 
 <body>
+    <div id="score-header">
+        Score:
+    </div>
 
-    <body>
+    <div id="score-container">
 
-        <button class="btn" id="rock">Rock</button>
-        <button class="btn" id="paper">Paper</button>
-        <button class="btn" id="scissors">Scissors</button>
+        <!-- <div class="score">
+            You: 4 Computer: 3
+        </div> -->
+        <!-- enter scoreboard via js -->
+    </div>
+    <p>Rock, Paper, or Scissors</p>
+    <div class="imgs">
 
-        <div id="container">
+        <img src="./images/rock.jpg" id="rock" />
+        <img src="./images/paper.jpg" id="paper" />
+        <img src="./images/scissors.jpg" id="scissors" />
 
-        </div>
+    </div>
 
-    </body>
+    <div class="computer-choice">
+        <p>
+            Computer Chooses:
+        </p>
+    </div>
+
+    <div>
+        <img src="./images/rock.jpg" id="comp-rock" class="displayoff" />
+        <img src="./images/paper.jpg" id="comp-paper" class="displayoff" />
+        <img src="./images/scissors.jpg" id="comp-scissors" class="displayoff" />
+    </div>
+
+    <div id="result">
+
+        <!-- <div>
+            You Win!
+        </div> -->
+
+    </div>
+    <button type="button" id="button">Play Again</button>
+
+
+</body>
 
 </html>
